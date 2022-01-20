@@ -1,25 +1,17 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import messaging from '@react-native-firebase/messaging';
-import PushNotification from 'react-native-push-notification';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import FirstPage from './FirstPage';
+import NextPage from './NextPage';
 
 export default function App() {
-  PushNotification.createChannel({
-    channelId: 'channel-id',
-    channelName: 'My channel',
-  });
 
-  const pushData = async messaging => {
-    PushNotification.localNotification({
-      channelId: 'channel-id',
-      message: messaging.notification.body,
-      title: messaging.notification.title,
-    });
-    console.log('message:', messaging);
-  };
+  // Отправляет пуши, когда аппка и открыта, и закрыта
+  // messaging().onMessage(pushData);
 
-  messaging().onMessage(pushData);
-
+  // Получение униклаьного токена девайса, чтобы отправлять пуши кому-то конкертному
   const getToken = async () => {
     const token = await messaging().getToken();
     console.log('token:', token);
@@ -28,10 +20,16 @@ export default function App() {
   useEffect(() => {
     getToken();
   }, []);
+
+  const Tab = createBottomTabNavigator();
+
   return (
-    <View>
-      <Text>Hello</Text>
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="First" component={FirstPage}/>
+        <Tab.Screen name="Second" component={NextPage}/>
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 

@@ -10,11 +10,16 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@notifee/react-native": "^4.0.1",
     "@react-native-firebase/app": "^14.2.2",
     "@react-native-firebase/messaging": "^14.2.2",
+    "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/native": "^6.0.6",
     "react": "17.0.2",
     "react-native": "0.67.0",
-    "react-native-push-notification": "^8.1.1"
+    "react-native-push-notification": "^8.1.1",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.10.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
